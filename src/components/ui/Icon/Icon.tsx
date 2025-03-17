@@ -35,16 +35,13 @@ export const Icon = ({ name, size = 24, color, className }: IconProps) => {
   }
 
   const props = {
+    ...IconComponent,
     ...calculatedIconSize,
     className: clsx(styles.icon, className, {
       [String(styles.iconWhite)]: color === 'white',
       [String(styles.iconBlack)]: color === 'black',
     }),
   };
-
-  if (!IconComponent) {
-    return null;
-  }
 
   return <IconComponent {...props} />;
 };

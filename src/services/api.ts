@@ -6,7 +6,7 @@ const $api = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_NODE_ENV === 'development'
       ? 'http://localhost:5000'
-      : process.env.NEXT_PUBLIC_API_KEY,
+      : 'http://80.90.191.61:5000',
 });
 
 $api.interceptors.request.use((config) => {

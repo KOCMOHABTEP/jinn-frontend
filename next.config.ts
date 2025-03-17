@@ -1,8 +1,22 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  poweredByHeader: false,
+  // poweredByHeader: false,
   reactStrictMode: true,
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            icon: true,
+          },
+        },
+      ],
+    });
+    return config;
+  },
   experimental: {
     turbo: {
       rules: {
@@ -12,33 +26,6 @@ const nextConfig: NextConfig = {
         },
       },
     },
-  },
-  webpack: (config) => {
-    // Add rule for SVG files
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                {
-                  name: 'preset-default',
-                  params: {
-                    overrides: { removeViewBox: false },
-                    dimensions: false,
-                  },
-                },
-              ],
-            },
-          },
-        },
-        'url-loader',
-      ],
-    });
-
-    return config;
   },
 };
 
