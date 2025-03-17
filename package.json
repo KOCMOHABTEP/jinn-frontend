@@ -19,7 +19,7 @@
     "lint:fix": "eslint \"src/**/*.+(ts|js|tsx)\" --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "format:ci": "prettier --list-different .",
+    "format:ci": "prettier --list-different ."
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
@@ -52,6 +52,7 @@
     "@eslint/js": "9.22.0",
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
     "@svgr/webpack": "8.1.0",
+    "@swc/core": "1.11.10",
     "@types/node": "22.13.10",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
