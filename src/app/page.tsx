@@ -1,76 +1,48 @@
-import Image from 'next/image';
+import { PrivateRoute } from '@/components/layout/PrivateRoute';
+import { CategoryList } from '@/components/ui/CategoryList';
+import { CategoryListItem } from '@/components/ui/CategoryList/CategoryListItem';
+import { AppRoutesConfig } from '@/config/app-routes.config';
+import AboutIllustration from '@/public/illustrations/about.jpg';
+import SettingsIllustration from '@/public/illustrations/settings.jpg';
+import StructureIllustration from '@/public/illustrations/structure.png';
 
-import styles from './page.module.css';
+const CATEGORIES = [
+  {
+    title: 'Просмотр структуры',
+    description: 'Перейти к структуре компании',
+    href: AppRoutesConfig.STRUCTURE,
+    image: StructureIllustration,
+  },
+  {
+    title: 'О проекте',
+    description: 'Просмотр информации о проекте',
+    href: AppRoutesConfig.ABOUT,
+    image: AboutIllustration,
+  },
+  {
+    title: 'Настройки',
+    description: 'Перейти к настройкам',
+    href: AppRoutesConfig.SETTINGS,
+    image: SettingsIllustration,
+  },
+];
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a href="https://vercel.com?utm_source=typescript-nextjs-starter" target="_blank" rel="noopener noreferrer">
-            By{' '}
-            <Image src="/vercel.svg" alt="Vercel Logo" className={styles.vercelLogo} width={100} height={24} priority />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=typescript-nextjs-starter"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=typescript-nextjs-starter"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=typescript-nextjs-starter"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=typescript-nextjs-starter"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-        </a>
-      </div>
-    </main>
+    <PrivateRoute>
+      <main>
+        <CategoryList>
+          {CATEGORIES.map(({ title, description, href, image }, index) => (
+            <CategoryListItem
+              key={index}
+              title={title}
+              description={description}
+              href={href}
+              image={image}
+            />
+          ))}
+        </CategoryList>
+      </main>
+    </PrivateRoute>
   );
 }

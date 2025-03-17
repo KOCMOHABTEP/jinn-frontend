@@ -1,0 +1,36 @@
+.container {
+  color: var(--color-text-grey);
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: block;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover {
+    color: var(--color-white);
+    background: var(--color-grey);
+  }
+
+  & + & {
+    margin-top: 2px;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+  }
+}
+
+.itemIcon {
+  color: inherit;
+  margin-right: 8px;
+}
+
+.itemLabel {
+  font-size: 14px;
+}

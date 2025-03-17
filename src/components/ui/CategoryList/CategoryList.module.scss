@@ -1,0 +1,11 @@
+.container {
+  padding: 16px;
+  background: var(--color-violet-secondary);
+  border-radius: 8px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+}

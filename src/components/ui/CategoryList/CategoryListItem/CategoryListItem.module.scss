@@ -1,0 +1,49 @@
+.container {
+  padding: 16px;
+  color: var(--color-violet-primary);
+  background: var(--color-white);
+  border-radius: 8px;
+  border: solid 1px var(--color-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--color-violet-primary);
+    color: var(--color-white);
+  }
+
+  .containerLink {
+    color: inherit;
+  }
+}
+
+.head {
+  margin-bottom: 16px;
+
+  .headImage {
+    height: 120px;
+    border-radius: 8px;
+    background: var(--color-violet-secondary);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .headImageImg {
+    height: auto;
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.content {
+  .contentTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .contentDescription {
+    font-size: 16px;
+  }
+}

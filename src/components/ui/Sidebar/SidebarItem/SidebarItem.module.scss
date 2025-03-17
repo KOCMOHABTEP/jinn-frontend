@@ -1,0 +1,43 @@
+.item {
+  position: relative;
+  display: flex;
+  padding: 16px;
+  border-radius: 6px;
+  overflow: hidden;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:not(.itemActive):hover {
+    background: var(--color-violet-secondary);
+  }
+}
+
+.itemActive {
+  background: var(--color-violet-primary);
+  color: var(--color-white);
+}
+
+.itemCollapsed {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+
+  &::after {
+    display: none;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.containerIcon {
+  color: inherit;
+}
+
+.containerLabel {
+  margin-left: 8px;
+  font-size: 14px;
+}

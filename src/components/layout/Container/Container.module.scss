@@ -1,0 +1,28 @@
+.root {
+  min-height: 100vh;
+  max-width: calc(100% - 320px);
+  width: 100%;
+  padding-top: 80px;
+  margin-left: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rootFull {
+  max-width: calc(100% - 90px);
+  margin-left: 90px;
+}
+
+.content {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  padding: 40px 32px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentFull {
+  max-width: initial;
+}

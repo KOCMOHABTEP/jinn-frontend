@@ -1,0 +1,108 @@
+.input {
+  font-size: 14px;
+  line-height: 16px;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  height: 50px;
+  padding: 24px 16px 8px;
+  border-radius: 6px;
+  border: solid 1px var(--color-border);
+  background: var(--color-white);
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:-webkit-autofill {
+    transition:
+      background-color 600000s 0s,
+      color 600000s 0s;
+  }
+
+  &:focus {
+    border: solid 1px var(--color-violet-secondary);
+    box-shadow: var(--box-shadow-violet);
+  }
+
+  &:focus + .placeholder,
+  &:not(:focus, :placeholder-shown) + .placeholder {
+    font-size: 14px;
+    line-height: 14px;
+    top: 8px;
+  }
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputLabel {
+}
+
+.disabled {
+  cursor: not-allowed;
+  background-color: var(--color-border-light);
+}
+
+.error {
+  border: solid 1px var(--color-red);
+  box-shadow: var(--box-shadow-red);
+
+  &:focus {
+    border: solid 1px var(--color-red-200);
+    box-shadow: var(--box-shadow-red);
+  }
+}
+
+.errorContainer {
+  margin-top: 8px;
+  display: flex;
+}
+
+.errorIcon {
+  color: var(--color-red);
+  margin-right: 4px;
+}
+
+.errorMessage {
+  font-size: 12px;
+  color: var(--color-red);
+}
+
+.hint {
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.hintIcon {
+  color: var(--color-grey);
+  margin-right: 8px;
+}
+
+.hintMessage {
+  font-size: 12px;
+  color: var(--color-grey);
+}
+
+.placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--color-text-grey);
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.placeholderModified {
+  font-size: 12px;
+  line-height: 14px;
+  top: 8px;
+}
+
+.placeholderRequired {
+  color: var(--color-red-200);
+}

@@ -1,0 +1,116 @@
+.root {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 480px;
+  width: 100%;
+  border-radius: 8px;
+  border: solid 1px var(--color-border);
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.containerRow {
+  padding: 32px;
+  flex: 1;
+  position: relative;
+}
+
+.containerHeader {
+}
+
+.containerHeaderAvatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-violet-secondary);
+  border: solid 1px var(--color-violet-primary);
+  position: relative;
+  z-index: 20;
+}
+
+.containerHeaderAvatarBackdrop {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(146 143 255 / 100%) 0%,
+    rgb(247 24 196 / 100%) 50%,
+    rgb(35 234 164 / 100%) 100%
+  );
+  z-index: 10;
+}
+
+.containerHeaderAvatarImage {
+  width: 64px;
+  height: 64px;
+  opacity: 0.2;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+}
+
+.content {
+}
+
+.contentHead {
+  margin-bottom: 24px;
+}
+
+.contentHeadTitle {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.contentHeadDescription {
+  font-size: 18px;
+}
+
+.contentBody {
+}
+
+.contentRow {
+  & + & {
+    margin-top: 16px;
+  }
+}
+
+.contentInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.contentInfoLink {
+  font-size: 14px;
+}
+
+.contentButton {
+  width: 100%;
+}
+
+.contentFooter {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.contentFooterCaption {
+  font-size: 14px;
+}
+
+.contentFooterLink {
+}

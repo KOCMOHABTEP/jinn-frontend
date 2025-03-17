@@ -1,0 +1,110 @@
+.container {
+  width: 200px;
+  border: solid 1px var(--color-border);
+  border-radius: 8px 8px 8px 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.containerActive {
+  background: var(--color-violet-ghost);
+}
+
+.containerHeader {
+  margin: auto;
+  position: absolute;
+  left: 0;
+  top: -24px;
+  right: 0;
+}
+
+.containerHeaderAvatar {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-violet-secondary);
+  border: solid 1px var(--color-violet-primary);
+  position: relative;
+  z-index: 20;
+}
+
+.containerHeaderAvatarBackdrop {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(146 143 255 / 100%) 0%,
+    rgb(247 24 196 / 100%) 50%,
+    rgb(35 234 164 / 100%) 100%
+  );
+  z-index: 10;
+}
+
+.containerHeaderAvatarImage {
+  width: 32px;
+  height: 32px;
+  opacity: 0.2;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+}
+
+.content {
+  font-size: 14px;
+  text-align: center;
+  padding: 32px 8px 8px;
+}
+
+.contentCaption {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentCaptionLabel {
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: var(--color-white);
+  background: var(--color-violet-primary);
+}
+
+.contextMenuContainer {
+  position: relative;
+  z-index: 100;
+}
+
+.contextMenu {
+  max-height: 200px;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: 8px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.contextMenuItem {
+  font-size: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: var(--color-violet-ghost);
+  }
+}

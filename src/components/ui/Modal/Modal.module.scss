@@ -1,0 +1,51 @@
+.overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--color-background-overlay-modal);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 600;
+}
+
+.item {
+  padding: 32px;
+  min-width: 320px;
+  width: 100%;
+  max-width: 720px;
+  background-color: var(--color-white);
+  border: solid 1px var(--color-border);
+  position: relative;
+  border-radius: 8px;
+}
+
+.itemClose {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.itemCloseIcon {
+  color: #000;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.headTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.headDescription {
+  color: var(--color-grey);
+  flex-direction: column;
+}

@@ -1,0 +1,46 @@
+.header {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container {
+  padding: 24px 0;
+}
+
+.grid {
+}
+
+.gridRow {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.gridItem {
+  position: relative;
+}
+
+.gridSubItem {
+  padding-left: 20px;
+  padding-top: 32px;
+  position: relative;
+
+  & .gridItem + .gridItem {
+    padding-top: 32px;
+  }
+
+  & > .gridItem::before {
+    content: '';
+    left: -20px;
+    bottom: 16px;
+    width: 16px;
+    height: calc(100% + 24px);
+    position: absolute;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #dbdbdb;
+    border-radius: 0 0 0 3px;
+  }
+}
