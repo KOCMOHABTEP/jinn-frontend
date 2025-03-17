@@ -3,10 +3,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 const $api = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_NODE_ENV === 'development'
-      ? 'http://localhost:5000'
-      : 'http://80.90.191.61:5000',
+  baseURL: process.env.NEXT_PUBLIC_API_KEY,
 });
 
 $api.interceptors.request.use((config) => {

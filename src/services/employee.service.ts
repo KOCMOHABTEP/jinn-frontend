@@ -1,5 +1,9 @@
 import $api from '@/services/api';
-import { IEmployee, IEmployeeTreeStructure } from '@/types/IEmployee';
+import {
+  AssignManagerDto,
+  IEmployee,
+  IEmployeeTreeStructure,
+} from '@/types/IEmployee';
 
 export default class EmployeeService {
   static async getList() {
@@ -14,10 +18,7 @@ export default class EmployeeService {
     return $api.post<IEmployee>(`/employees`, dto);
   }
 
-  static async assignManager(dto: {
-    managerId: number | null;
-    employeeId: number;
-  }) {
+  static async assignManager(dto: AssignManagerDto) {
     return $api.post<IEmployee>(`/employees/assign-manager`, dto);
   }
 

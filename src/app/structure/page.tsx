@@ -8,14 +8,18 @@ import { EditEmployee } from '@/components/features/EditEmployee';
 import { PrivateRoute } from '@/components/layout/PrivateRoute';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
+import { Spinner } from '@/components/ui/Spinner';
 import { UserCard } from '@/components/ui/UserCard';
 import {
+  fetchDeleteEmployee,
   fetchEmployeesList,
   fetchEmployeesTreeStructure,
 } from '@/lib/redux/employees/employees.action';
-import { getEmployeesTree } from '@/lib/redux/employees/employees.selector';
+import {
+  getEmployeesTree,
+  getEmployeesTreeLoadingStatus,
+} from '@/lib/redux/employees/employees.selector';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/store';
-import EmployeeService from '@/services/employee.service';
 import { IEmployeeTreeStructure } from '@/types/IEmployee';
 import styles from './page.module.scss';
 
@@ -25,6 +29,12 @@ type TContextMenuData = {
 };
 
 export default function Structure() {
+  const dispatch = useAppDispatch();
+  const employeesTreeStructure = useAppSelector(getEmployeesTree);
+  const employeesTreeStructureLoadingStatus = useAppSelector(
+    getEmployeesTreeLoadingStatus
+  );
+
   const [createEmployeeFormOpened, setCreateEmployeeFormOpened] =
     useState(false);
   const [editEmployeeFormOpened, setEditEmployeeFormOpened] = useState(false);
@@ -33,22 +43,12 @@ export default function Structure() {
     payload: {},
   });
 
-  const dispatch = useAppDispatch();
-  const employeesTreeStructure = useAppSelector(getEmployeesTree);
-
   useEffect(() => {
     dispatch(fetchEmployeesList());
     dispatch(fetchEmployeesTreeStructure());
   }, [dispatch]);
 
-  const handleSuccessCreateEmployee = () => {
-    setCreateEmployeeFormOpened(false);
-    dispatch(fetchEmployeesList());
-    dispatch(fetchEmployeesTreeStructure());
-  };
-
-  const handleSuccessEditEmployee = () => {
-    setCreateEmployeeFormOpened(false);
+  const handleRefreshData = () => {
     dispatch(fetchEmployeesList());
     dispatch(fetchEmployeesTreeStructure());
   };
@@ -61,10 +61,8 @@ export default function Structure() {
       try {
         const employeeId = payload?.employeeId;
 
-        await EmployeeService.deleteById({
-          id: employeeId,
-        });
-        dispatch(fetchEmployeesTreeStructure());
+        await dispatch(fetchDeleteEmployee({ id: employeeId }));
+        await dispatch(fetchEmployeesTreeStructure());
       } catch {
         toast.error('Возникла ошибка');
       }
@@ -116,7 +114,9 @@ export default function Structure() {
         <div className={styles.container}>
           <div className={styles.grid}>
             <div className={styles.gridRow}>
-              {renderTree(employeesTreeStructure)}
+              {employeesTreeStructureLoadingStatus === 'pending' && <Spinner />}
+              {employeesTreeStructureLoadingStatus === 'succeeded' &&
+                renderTree(employeesTreeStructure)}
             </div>
           </div>
         </div>
@@ -128,7 +128,10 @@ export default function Structure() {
         visibility={createEmployeeFormOpened}
         onClose={() => setCreateEmployeeFormOpened(false)}
       >
-        <CreateEmployee onSuccess={handleSuccessCreateEmployee} />
+        <CreateEmployee
+          onSuccess={handleRefreshData}
+          onBeforeSend={() => setCreateEmployeeFormOpened(false)}
+        />
       </Modal>
       <Modal
         title={'Редактировать пользователя'}
@@ -140,7 +143,8 @@ export default function Structure() {
           <EditEmployee
             managerId={contextMenuData.payload.managerId || null}
             employeeId={contextMenuData.payload.employeeId}
-            onSuccess={handleSuccessEditEmployee}
+            onSuccess={handleRefreshData}
+            onBeforeSend={() => setEditEmployeeFormOpened(false)}
           />
         )}
       </Modal>

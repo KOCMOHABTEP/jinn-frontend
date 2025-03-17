@@ -6,5 +6,5 @@ export const getEmployeesList = (state: RootState) =>
   state.employees.employeesList;
 export const getEmployeesMap = (state: RootState) =>
   state.employees.employeesMap;
-export const getEmployeesLoadingStatus = (state: RootState) =>
+export const getEmployeesTreeLoadingStatus = (state: RootState) =>
   state.employees.loading;

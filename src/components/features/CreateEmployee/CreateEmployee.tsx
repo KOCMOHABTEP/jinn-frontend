@@ -16,6 +16,7 @@ import styles from './CreateEmployee.module.scss';
 
 type CreateEmployeeProps = {
   onSuccess: () => void;
+  onBeforeSend: () => void;
 };
 
 type CreateEmployeeFormValues = {
@@ -25,7 +26,10 @@ type CreateEmployeeFormValues = {
   managerId?: number | null;
 };
 
-export const CreateEmployee = ({ onSuccess }: CreateEmployeeProps) => {
+export const CreateEmployee = ({
+  onSuccess,
+  onBeforeSend,
+}: CreateEmployeeProps) => {
   const employeesList = useAppSelector(getEmployeesList);
 
   const managersDropdownOptions = useMemo(() => {
@@ -63,6 +67,7 @@ export const CreateEmployee = ({ onSuccess }: CreateEmployeeProps) => {
     const { firstName, lastName, middleName, managerId } = data;
 
     try {
+      onBeforeSend();
       await EmployeeService.createEmployee({
         firstName,
         lastName,

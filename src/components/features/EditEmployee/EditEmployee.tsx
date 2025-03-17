@@ -9,18 +9,19 @@ import * as Yup from 'yup';
 import { Button } from '@/components/ui/Button';
 import { Dropdown } from '@/components/ui/Dropdown';
 import { Input } from '@/components/ui/Input';
+import { fetchAssignManager } from '@/lib/redux/employees/employees.action';
 import {
   getEmployeesList,
   getEmployeesMap,
 } from '@/lib/redux/employees/employees.selector';
-import { useAppSelector } from '@/lib/redux/store';
-import EmployeeService from '@/services/employee.service';
+import { useAppDispatch, useAppSelector } from '@/lib/redux/store';
 import styles from './EditEmployee.module.scss';
 
 type CreateEmployeeProps = {
   managerId: number | null;
   employeeId: number;
   onSuccess: () => void;
+  onBeforeSend: () => void;
 };
 
 type EditEmployeeFormValues = {
@@ -32,16 +33,26 @@ export const EditEmployee = ({
   managerId,
   employeeId,
   onSuccess,
+  onBeforeSend,
 }: CreateEmployeeProps) => {
+  const dispatch = useAppDispatch();
   const employeesList = useAppSelector(getEmployeesList);
   const employeesMap = useAppSelector(getEmployeesMap);
   const currentEmployee = employeesMap[employeeId.toString()];
 
   const managersDropdownOptions = useMemo(() => {
-    const managers = employeesList.map((emp) => ({
-      label: `${emp.lastName} ${emp.firstName} ${emp.middleName}`,
-      value: emp.id,
-    }));
+    const managers = employeesList.reduce<{ label: string; value: number }[]>(
+      (acc, emp) => {
+        if (emp.id !== employeeId) {
+          acc.push({
+            label: `${emp.lastName} ${emp.firstName} ${emp.middleName}`,
+            value: emp.id,
+          });
+        }
+        return acc;
+      },
+      []
+    );
 
     return [
       {
@@ -50,7 +61,7 @@ export const EditEmployee = ({
       },
       ...managers,
     ];
-  }, [employeesList]);
+  }, [employeeId, employeesList]);
 
   const createEmployeeFormValidationSchema = Yup.object().shape({
     employeeId: Yup.number().required(),
@@ -73,10 +84,13 @@ export const EditEmployee = ({
     const { employeeId, managerId } = data;
 
     try {
-      await EmployeeService.assignManager({
-        employeeId,
-        managerId,
-      });
+      onBeforeSend();
+      await dispatch(
+        fetchAssignManager({
+          employeeId,
+          managerId,
+        })
+      );
       onSuccess();
     } catch (e) {
       console.log(e);

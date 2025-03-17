@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
+  fetchAssignManager,
+  fetchDeleteEmployee,
   fetchEmployeesList,
   fetchEmployeesTreeStructure,
 } from '@/lib/redux/employees/employees.action';
@@ -32,11 +34,7 @@ export const employeesSlice = createSlice({
   extraReducers: (builder) => {
     // fetchEmployeesList
     builder
-      .addCase(fetchEmployeesList.pending, (state) => {
-        state.loading = 'pending';
-      })
       .addCase(fetchEmployeesList.fulfilled, (state, action) => {
-        state.loading = 'succeeded';
         state.employeesList = action.payload;
         state.error = null;
 
@@ -49,14 +47,45 @@ export const employeesSlice = createSlice({
         state.employeesMap = byId;
       })
       .addCase(fetchEmployeesList.rejected, (state, action) => {
-        state.loading = 'failed';
         state.employeesList = [];
         state.error = action.payload;
       });
+    // fetchDeleteEmployee
+    builder
+      .addCase(fetchDeleteEmployee.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchDeleteEmployee.fulfilled, (state) => {
+        state.loading = 'succeeded';
+      })
+      .addCase(fetchDeleteEmployee.rejected, (state) => {
+        state.loading = 'failed';
+      });
     // fetchEmployeesTreeStructure
-    builder.addCase(fetchEmployeesTreeStructure.fulfilled, (state, action) => {
-      state.employeesTree = action.payload;
-    });
+    builder
+      .addCase(fetchEmployeesTreeStructure.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchEmployeesTreeStructure.fulfilled, (state, action) => {
+        state.loading = 'succeeded';
+        state.employeesTree = action.payload;
+      })
+      .addCase(fetchEmployeesTreeStructure.rejected, (state, action) => {
+        state.loading = 'failed';
+        state.employeesTree = [];
+        state.error = action.payload;
+      });
+    // fetchAssignManager
+    builder
+      .addCase(fetchAssignManager.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchAssignManager.fulfilled, (state) => {
+        state.loading = 'succeeded';
+      })
+      .addCase(fetchAssignManager.rejected, (state) => {
+        state.loading = 'failed';
+      });
   },
 });
 

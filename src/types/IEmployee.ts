@@ -9,3 +9,8 @@ export interface IEmployee {
 export interface IEmployeeTreeStructure extends IEmployee {
   subordinates: any[];
 }
+
+export interface AssignManagerDto {
+  managerId: number | null;
+  employeeId: number;
+}
